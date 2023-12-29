@@ -5,8 +5,14 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// $routes->setDefaultController('Home');
+
 $routes->get('/', 'Home::index');
 $routes->get('register', 'Home::register');
 $routes->get('login', 'Home::login');
-// $routes->setAutoRoute(true);
+
+$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('index');
+$routes->setTranslateURIDashes(false);
+$routes->set404Override();
+$routes->setAutoRoute(true);

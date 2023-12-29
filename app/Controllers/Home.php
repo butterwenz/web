@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\NewsModel;
+use App\Models\HomeModel;
+
 class Home extends BaseController
 {
     public function index()
     {
-        return view('index');
+        $model = model(HomeModel::class);
+
+        $data['songs'] = $model -> getSongList();
+         // Debug: 检查获取到的数据
+        //  var_dump($data['songs']);
+        return view('home',$data);
     }
     public function register()
     {
@@ -20,8 +26,21 @@ class Home extends BaseController
     {
         return view('addsong');
     }
-    public function Listen_song()
+    public function SongPage()
     {
-        return view('Listen_song');
+        return view('SongPage');
+    }
+    public function addUesr_model()
+    {
+        if($_POST){
+            $model = new NewsModel();
+            $model->save([
+                'title' => $this->request->getVar('title'),
+                'content'  => $this->request->getVar('content'),
+            ]);
+            return redirect()->to(base_url('news')); 
+        }else{
+            return view('form');
+        }
     }
 }
