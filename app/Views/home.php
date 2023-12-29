@@ -53,8 +53,10 @@
             </tr>
             <tr valign="bottom">
               <td colspan="2" align="right">
-                發行人與歌手
-                <span> ． </span><?php echo ($song['is_checked'] === 1) ? "站長已檢查" : "" ?>
+              <?= $song["singers"] ?>
+                
+
+                <?php echo ($song['is_checked'] === '1') ? "<span> ．站長已檢查  </span>" : "" ?>
 
               </td>
             </tr>

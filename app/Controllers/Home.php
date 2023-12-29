@@ -7,11 +7,17 @@ class Home extends BaseController
 {
     public function index()
     {
-        $model = model(HomeModel::class);
+        $db = \Config\Database::connect();
+        $query = $db->table('video')
+        ->select('video.*, GROUP_CONCAT(feat.singer SEPARATOR "．") AS singers')
+        ->join('feat', 'feat.video_id = video.video_id', 'left')
+        ->groupBy('video.video_id')
+        ->orderBy('video_id', 'DESC')
+        ->get();
+        
 
-        $data['songs'] = $model -> getSongList();
-         // Debug: 检查获取到的数据
-        //  var_dump($data['songs']);
+        $data['songs'] =  $query->getResultArray();
+
         return view('home',$data);
     }
     public function register()
