@@ -1,4 +1,7 @@
 <?php $session = session();?>
+<?php if(isset($_GET['error'])): ?>
+    <script>alert('<?php echo $_GET['error']; ?>');</script>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
