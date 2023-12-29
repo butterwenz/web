@@ -7,16 +7,8 @@ class Home extends BaseController
 {
     public function index()
     {
-        $db = \Config\Database::connect();
-        $query = $db->table('video')
-        ->select('video.*, GROUP_CONCAT(feat.singer SEPARATOR "．") AS singers')
-        ->join('feat', 'feat.video_id = video.video_id', 'left')
-        ->groupBy('video.video_id')
-        ->orderBy('video_id', 'DESC')
-        ->get();
-        
-
-        $data['songs'] =  $query->getResultArray();
+        $model = new HomeModel();
+        $data['songs'] = $model->getSongList();
 
         return view('home',$data);
     }
