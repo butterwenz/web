@@ -10,19 +10,19 @@
 <div class="container mt-5">
 <a href="<?= base_url()?>">回到首頁</a>
   <h2>會員註冊</h2>
-  <form id="registerForm">
+  <form id="registerForm" method="post" action="<?= base_url('register_model') ?>">
     <div class="form-group">
       <label for="registerName">暱稱</label>
-      <input type="text" class="form-control" id="registerName" placeholder="請輸入暱稱">
+      <input type="text" class="form-control" id="registerName" name="registerName" placeholder="請輸入暱稱">
     </div>
     <div class="form-group">
       <label for="registerUsername">帳號</label>
-      <input type="text" class="form-control" id="registerUsername" placeholder="請輸入帳號">
+      <input type="text" class="form-control" id="registerUsername" name="registerUsername" placeholder="請輸入帳號">
     </div>
 
     <div class="form-group">
       <label for="registerPassword">密碼</label>
-      <input type="password" class="form-control" id="registerPassword" placeholder="請輸入密碼">
+      <input type="password" class="form-control" id="registerPassword" name="registerUsername" placeholder="請輸入密碼">
     </div>
     <div class="form-group">
       <label for="confirmPassword">確認密碼</label>
@@ -37,24 +37,41 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- 你的自訂的 JavaScript -->
+
 <script>
-  // 在這裡寫你的 JavaScript 代碼，處理登入和註冊表單的提交事件、驗證等等。
   $(document).ready(function() {
-    // 註冊表單提交事件
     $('#registerForm').submit(function(e) {
-      e.preventDefault(); // 防止表單默認提交行為，可以在此處處理註冊邏輯
+      var empty = false;
+      var name = $('#registerName').val();
+      var account = $('#registerUsername').val();
       var password = $('#registerPassword').val();
       var confirmPassword = $('#confirmPassword').val();
       
+      if (name === '' || account === '' || password === '' || confirmPassword === '') {
+        alert('請填寫所有欄位');
+        empty = true;
+        return false;
+      }
+
+      if (password.length < 8) {
+        alert('密碼必須至少包含8個字元');
+        empty = true;
+        return false;
+      }
+
       if (password !== confirmPassword) {
         alert('密碼不一致，請重新輸入');
-        return;
+        empty = true;
+        return false;
       }
-      
-      // 你的註冊處理代碼
+      if(empty){  
+            e.preventDefault(); // 防止表單提交
+              }
     });
   });
 </script>
+
+
+
 </body>
 </html>

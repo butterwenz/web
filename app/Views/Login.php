@@ -11,14 +11,14 @@
 <div class="container mt-5">
 <a href="<?= base_url()?>">回到首頁</a>
   <h2>會員登入</h2>
-  <form id="loginForm">
+  <form id="loginForm" method="post" action="<?= base_url('login_model') ?>">
     <div class="form-group">
-      <label for="loginEmail">Email 地址</label>
-      <input type="email" class="form-control" id="loginEmail" placeholder="請輸入Email">
+      <label for="loginUsername">帳號</label>
+      <input type="text" class="form-control" id="loginUsername" name="loginUsername" placeholder="請輸入帳號">
     </div>
     <div class="form-group">
       <label for="loginPassword">密碼</label>
-      <input type="password" class="form-control" id="loginPassword" placeholder="請輸入密碼">
+      <input type="password" class="form-control" id="loginPassword" name="loginPassword"  placeholder="請輸入大於8位密碼">
     </div>
     <button type="submit" class="btn btn-primary">登入</button>
   </form>
@@ -29,14 +29,23 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- 你的自訂的 JavaScript -->
+<!--avaScript -->
 <script>
-  // 在這裡寫你的 JavaScript 代碼，處理登入和註冊表單的提交事件、驗證等等。
   $(document).ready(function() {
-    // 登入表單提交事件
     $('#loginForm').submit(function(e) {
-      e.preventDefault(); // 防止表單默認提交行為，可以在此處處理登入邏輯
-      // 你的登入處理代碼
+      var empty = false;
+      var account = $('#loginUsername').val();
+      var password = $('#loginPassword').val();
+      
+      if (account === '' || password === '') {
+        alert('請填寫所有欄位');
+        empty = true;
+        return false;
+      }
+
+      if(empty){  
+            e.preventDefault(); // 防止表單提交
+              }
     });
   });
 </script>

@@ -1,3 +1,4 @@
+<?php $session = session();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,12 @@
         <!-- 左側選項 -->
         <h3>選項</h3>
         <ul class="list-group">
+        <?php if(isset($session->account)): ?>
+          <li class="list-group-item">你好，<?=$session->userName?></li>
+          <?php else : ?>
           <li class="list-group-item"><a href="<?= base_url()?>login">登入</a> / <a href="<?= base_url()?>register">註冊</a></li>
+          <?= $session->get('account')?>
+          <?php endif; ?>
           <li class="list-group-item">歌曲列表</li>
           <li class="list-group-item">新增歌曲</li>
         </ul>
@@ -41,10 +47,10 @@
             <tr valign="top">
               <td rowspan="3" style="width:90px;">
                 <div style="overflow:hidden;width:80px;height:60px;position:relative;margin:0;background:#000;">
-                  <a href="<?= $song['video_id'] ?>" target="_blank">
+                  
                     <img style="position:relative;border:0;width:80px;" src="https://i.ytimg.com/vi/<?= $song['youtube_vid'] ?>/default.jpg">
                     <!-- 歌曲時間可以在這裡放入 -->
-                  </a>
+                  
                 </div>
               </td>
               <td align="left" rowspan="2" class="song-name">
