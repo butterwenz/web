@@ -26,13 +26,16 @@
         <h3>選項</h3>
         <ul class="list-group">
         <?php if(isset($session->account)): ?>
-          <li class="list-group-item">你好，<?=$session->userName?></li>
+          <li class="list-group-item">你好，<?=$session->userName?> / <a href="<?= base_url()?>home/logout">登出</a></li>
           <?php else : ?>
           <li class="list-group-item"><a href="<?= base_url()?>login">登入</a> / <a href="<?= base_url()?>register">註冊</a></li>
-          <?= $session->get('account')?>
           <?php endif; ?>
           <li class="list-group-item">歌曲列表</li>
-          <li class="list-group-item">新增歌曲</li>
+          <li class="list-group-item">新增歌曲
+<?= md5('test123456')?><br>
+<?= md5('test123456')?><br>
+<?= md5('test123456')?><br>
+</li>
         </ul>
       </div>
       <div class="col-md-9">

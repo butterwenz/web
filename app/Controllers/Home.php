@@ -33,20 +33,20 @@ class Home extends BaseController
             $session = session();
             $account = $this->request->getPost('loginUsername');
             $password = $this->request->getPost('loginPassword');
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
 
             $homeModel = new HomeModel();
             $user=$homeModel->loginUser($account, $password);
             if($user != NULL){
-                
                 $session->set('isLoggedIn', true);
                 $session->set('userName',  $user->user_name);
                 $session->set('account',  $user->account);
+                return redirect()->to(base_url());
             }else{
-                echo "<script>alert('帳號或密碼錯誤');</script>";
+                return redirect()->to(base_url());
             }
         }
-        return redirect()->to(base_url(). '?error=帳號或密碼錯誤');
+        
 
     }
     public function logout()
@@ -57,7 +57,7 @@ class Home extends BaseController
         $session->remove('isLoggedIn');
         $session->remove('userName');
         $session->remove('account');
-        return $this->index();
+        return redirect()->to(base_url());
     }
     public function register()
     {
@@ -68,7 +68,7 @@ class Home extends BaseController
         if($_POST){
             $name = $this->request->getPost('registerName');
             $account = $this->request->getPost('registerUsername');
-            $password = $this->request->getPost('registerPassword');
+           echo $password = $this->request->getPost('registerPassword');
             
 
             $homeModel = new HomeModel();

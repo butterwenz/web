@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <label for="registerPassword">密碼</label>
-      <input type="password" class="form-control" id="registerPassword" name="registerUsername" placeholder="請輸入密碼">
+      <input type="password" class="form-control" id="registerPassword" name="registerPassword" placeholder="請輸入密碼">
     </div>
     <div class="form-group">
       <label for="confirmPassword">確認密碼</label>

@@ -18,29 +18,28 @@ class HomeModel extends Model
         return $query->getResultArray();
     }
     public function loginUser($account, $password){
+        $md5Password=md5($password);
         $builder = $this->db->table('user');
         $user = $builder->where('account', $account)
-        ->where('user_au4a83', $password)
+        ->where('user_au4a83',$md5Password)
         ->get()
         ->getRow();
-        return $user;
-
-        // if ($password === $user['user_au4a83']) {
-        //     // 密碼驗證成功
-            
-        // } else {
-        //     // 密碼驗證失敗或使用者不存在
-        //     return null;
-        // }
+        if ($user) {
+            // 密碼驗證成功
+            return $user;
+        } else {
+            // 密碼驗證失敗或使用者不存在
+            return null;
+        }
     }
     public function saveUser($name,$account, $password){
         
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $md5Password = md5($password);
         $time = date('Y-m-d H:i:s');
         $data = [
             'account' => $account,
             'user_name' => $name,
-            'user_au4a83' => $hashedPassword,
+            'user_au4a83' => $md5Password,
             'registration_date' =>  $time 
         ];
         $builder = $this->db->table('user');
