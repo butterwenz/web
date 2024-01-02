@@ -32,9 +32,7 @@
           <?php endif; ?>
           <li class="list-group-item">歌曲列表</li>
           <li class="list-group-item">新增歌曲
-<?= md5('test123456')?><br>
-<?= md5('test123456')?><br>
-<?= md5('test123456')?><br>
+
 </li>
         </ul>
       </div>
